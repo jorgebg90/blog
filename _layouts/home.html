@@ -17,6 +17,8 @@ layout: default
 
   <!-- Hero Section: Dominant, emphasis-forward -->
   <section class="home-hero home-hero--emphasized section-container">
+    {%- assign msg_posts_eyebrow = site.data.messages.eyebrow_posts[site_lang] | default: site.data.messages.eyebrow_posts.en -%}
+    {%- if page.eyebrow -%}<p class="eyebrow">{{ page.eyebrow | escape }}</p>{%- endif -%}
     {%- if page.hero_title or page.title -%}
       <h1 class="home-hero__title">{{ page.hero_title | default: page.title }}</h1>
     {%- endif -%}
@@ -48,16 +50,13 @@ layout: default
     {%- assign inline_posts = site.posts | where: 'lang', site_lang -%}
     {%- if inline_posts.size > 0 -%}
       <section class="home-posts-section section-container">
-        <ul class="post-list">
+        {%- assign card_link_text = site.data.messages.card_read[site_lang] | default: site.data.messages.card_read.en -%}
+        <div class="card-list">
           {%- for post in inline_posts -%}
-            <li>
-              <span class="post-meta">{{ post.date | date: "%b %-d, %Y" }}</span>
-              <h2>
-                <a class="post-link interactive" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-              </h2>
-            </li>
+            {%- assign post_desc = post.excerpt | strip_html | strip | truncate: 160 -%}
+            {%- include card.html eyebrow=msg_posts_eyebrow title=post.title description=post_desc url=post.url link_text=card_link_text featured=forloop.first -%}
           {%- endfor -%}
-        </ul>
+        </div>
       </section>
     {%- endif -%}
   {%- endif -%}

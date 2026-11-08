@@ -3,6 +3,8 @@
 # MM does not provide a post.html layout; single.html is MM's equivalent for blog posts.
 layout: single
 ---
+{%- assign post_lang = page.lang | default: site.default_lang | default: 'en' -%}
+<p class="eyebrow post-eyebrow">{{ site.data.messages.eyebrow_reading[post_lang] | default: site.data.messages.eyebrow_reading.en }}</p>
 <p class="post-reading-time" id="reading-time-badge" aria-label="Estimated reading time"></p>
 
 {{ content }}

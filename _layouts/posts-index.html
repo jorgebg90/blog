@@ -5,6 +5,8 @@ layout: default
 {%- assign seen_translation_keys = '|' -%}
 {%- assign has_visible_posts = false -%}
 {%- assign skipped_collision_count = 0 -%}
+{%- assign card_link_text = site.data.messages.card_read[site_lang] | default: site.data.messages.card_read.en -%}
+{%- assign card_eyebrow = site.data.messages.eyebrow_posts[site_lang] | default: site.data.messages.eyebrow_posts.en -%}
 
 <div class="posts-index">
   <header class="posts-index__header">
@@ -14,7 +16,7 @@ layout: default
     {%- endif -%}
   </header>
 
-  <ul class="post-list">
+  <div class="card-list">
     {%- assign ordered_posts = site.posts | reverse -%}
     {%- for post in ordered_posts -%}
       {%- assign post_lang = post.lang | default: '' | downcase -%}
@@ -36,19 +38,14 @@ layout: default
       {%- endif -%}
 
       {%- if should_render_post -%}
+        {%- assign is_featured = false -%}
+        {%- unless has_visible_posts -%}{%- assign is_featured = true -%}{%- endunless -%}
         {%- assign has_visible_posts = true -%}
-        <li>
-          <span class="post-meta"><i class="far fa-calendar-alt"></i> {{ post.date | date: "%b %-d, %Y" }}</span>
-          <h2>
-            <a class="post-link" href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
-          </h2>
-          {%- if post.excerpt -%}
-            <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 160 }}</p>
-          {%- endif -%}
-        </li>
+        {%- assign post_desc = post.excerpt | strip_html | strip | truncate: 160 -%}
+        {%- include card.html eyebrow=card_eyebrow title=post.title description=post_desc url=post.url link_text=card_link_text featured=is_featured -%}
       {%- endif -%}
     {%- endfor -%}
-  </ul>
+  </div>
 
   {%- unless has_visible_posts -%}
     {%- assign empty_messages = site.data.messages.posts_empty | default: empty -%}
