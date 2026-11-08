@@ -189,19 +189,15 @@ html { scrollbar-gutter: stable; }
 
 .home-hero {
   margin-bottom: $section-spacing;
-  text-align: center;
+  text-align: left; // 007: card design is left-aligned
 
   // Emphasized state — applies to primary hero
   &--emphasized {
     padding-top: $hero-spacing-top;
     padding-bottom: $hero-spacing-bottom;
-    background-color: $contrast-bg-primary;
-    border-bottom: 1px solid $contrast-border-default;
-    border-radius: 0; // Full-width on mobile
-
-    @media (min-width: 48em) {
-      border-radius: 4px;
-    }
+    background-color: transparent; // 007: tinted page background shows through
+    border-bottom: 0;
+    border-radius: 0;
   }
 
   &__title {
@@ -210,10 +206,9 @@ html { scrollbar-gutter: stable; }
     line-height: $rhythm-tight;
     letter-spacing: $letter-spacing-tight;
     margin-bottom: $space-token-2x;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
     color: $contrast-text-primary;
-    word-spacing: 0.1em; // Improve readability for longer titles
     max-width: none;
   }
 
@@ -222,18 +217,18 @@ html { scrollbar-gutter: stable; }
     line-height: $rhythm-body;
     width: 100%;
     max-width: 46rem;
-    margin-left: auto;
-    margin-right: auto;
+    margin-left: 0;
+    margin-right: 0;
     margin-bottom: $space-token-3x;
     color: $contrast-text-primary;
-    text-align: justify;
+    text-align: left;
     white-space: pre-line;
   }
 
   &__cta {
     width: 100%;
     max-width: 46rem;
-    margin: $space-token-2-5x auto 0;
+    margin: $space-token-2-5x 0 0;
     text-align: left;
     padding: 0;
   }
@@ -279,7 +274,7 @@ html { scrollbar-gutter: stable; }
 .home-content-section {
   padding: $card-padding;
   margin-bottom: $section-spacing;
-  background-color: $contrast-bg-primary;
+  background-color: transparent;
 
   p, li, h2, h3 {
     color: $contrast-text-primary;
@@ -294,7 +289,7 @@ html { scrollbar-gutter: stable; }
 // Home posts section — secondary content area
 .home-posts-section {
   padding: $card-padding;
-  background-color: $contrast-bg-primary;
+  background-color: transparent;
 
   .post-list {
     list-style: none;

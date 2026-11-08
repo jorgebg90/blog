@@ -4,8 +4,9 @@ title: Home
 lang: en
 translation_key: home
 permalink: /
-show_inline_posts: false
+show_inline_posts: true
 classes: home-en
+eyebrow: Software engineering
 hero_title: Welcome to jBlueprint.dev
 hero_intro: |-
   This space is dedicated to sharing practical notes on architecture, design patterns, and the disciplines that define quality software engineering, with a primary focus on the backend ecosystem.
