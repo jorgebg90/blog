@@ -43,7 +43,6 @@ Related docs:
 After deploying with your existing pipeline, run a live navigation check against production:
 
 ```zsh
-python3 scripts/validate_production_navigation.py --base-url "https://jblueprint.dev"
-python3 scripts/validate_production_navigation.py --base-url "https://www.jblueprint.dev"
+python3 scripts/validate_production_navigation.py --base-url "https://jblueprint.dev/blog/"
+python3 scripts/validate_production_navigation.py --base-url "https://www.jblueprint.dev/blog/"
 ```
-

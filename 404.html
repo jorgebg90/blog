@@ -19,10 +19,10 @@ classes: wide error-page-404
 <script>
   (function () {
     var url = new URL(window.location.href);
-    var baseUrl = "{{ site.baseurl | default: '' }}";
+    var baseUrl = "{{ site.baseurl | default: '' }}".replace(/\/+$/, "");
     var path = url.pathname;
 
-    if (baseUrl && path.indexOf(baseUrl) === 0) {
+    if (baseUrl && (path === baseUrl || path.indexOf(baseUrl + "/") === 0)) {
       path = path.slice(baseUrl.length) || "/";
     }
 
@@ -50,7 +50,7 @@ classes: wide error-page-404
     }
 
     if (redirectTarget) {
-      window.location.replace(redirectTarget);
+      window.location.replace(baseUrl + redirectTarget);
     }
   })();
 </script>
