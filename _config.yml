@@ -22,7 +22,7 @@ email: ""
 description: >-
   A bilingual Jekyll blog about software engineering, tools, and ideas.
   Written in English and Spanish.
-baseurl: "" # the subpath of your site, e.g. /blog
+baseurl: "/blog" # the subpath of your site, e.g. /blog
 url: "https://jblueprint.dev" # the base hostname & protocol for your site
 
 # Minimal Mistakes theme settings

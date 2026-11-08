@@ -82,7 +82,7 @@ def validate_page(base_url: str, page: PageExpectation, timeout: float) -> Tuple
     issues: List[ValidationIssue] = []
     checks: List[str] = []
 
-    page_url = urljoin(base_url, page.path)
+    page_url = urljoin(base_url.rstrip("/") + "/", page.path.lstrip("/"))
     result = fetch_html(page_url, timeout=timeout)
     checks.append(f"{page.path} -> HTTP {result.status}")
 
@@ -140,7 +140,11 @@ def validate_page(base_url: str, page: PageExpectation, timeout: float) -> Tuple
 
 def main() -> int:
     parser = argparse.ArgumentParser(description="Validate production navigation and language switcher")
-    parser.add_argument("--base-url", default="https://jblueprint.dev", help="Production base URL")
+    parser.add_argument(
+        "--base-url",
+        default="https://jblueprint.dev/blog/",
+        help="Production site URL, including its base path",
+    )
     parser.add_argument("--timeout", default=10.0, type=float, help="HTTP timeout in seconds")
     args = parser.parse_args()
 
@@ -198,4 +202,3 @@ def main() -> int:
 
 if __name__ == "__main__":
     sys.exit(main())
-

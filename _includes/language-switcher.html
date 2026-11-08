@@ -101,8 +101,9 @@
   aria-label="Language"
   data-language-switcher
   data-current-lang="{{ site_lang }}"
-  data-target-en="{{ en_target }}"
-  data-target-es="{{ es_target }}"
+  data-target-en="{{ en_target | relative_url }}"
+  data-target-es="{{ es_target | relative_url }}"
+  data-baseurl="{{ site.baseurl }}"
   data-has-equivalent-en="{{ has_en_equivalent }}"
   data-has-equivalent-es="{{ has_es_equivalent }}"
   data-translation-mode="{{ translation_mode }}"
