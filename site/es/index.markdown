@@ -4,8 +4,9 @@ title: Inicio
 lang: es
 translation_key: home
 permalink: /es/
-show_inline_posts: false
+show_inline_posts: true
 classes: home-es
+eyebrow: Ingeniería de software
 hero_title: Bienvenidos a jBlueprint.dev
 hero_intro: |-
   Este espacio está dedicado a compartir notas prácticas sobre arquitectura, patrones de diseño y las disciplinas que definen una ingeniería de software de calidad, enfocándome principalmente en el ecosistema backend.

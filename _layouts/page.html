@@ -30,6 +30,7 @@ layout: default
   <div class="page__inner-wrap">
 	{% unless page.header.overlay_color or page.header.overlay_image %}
 	  <header>
+		{% if page.eyebrow and page.eyebrow != '' %}<p class="eyebrow page__eyebrow">{{ page.eyebrow | escape }}</p>{% endif %}
 		{% if page.title -%}
 		<h1 id="page-title" class="page__title p-name" itemprop="headline">
 		  {{ page.title | markdownify | remove: "<p>" | remove: "</p>" }}
