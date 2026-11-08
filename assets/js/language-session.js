@@ -63,12 +63,19 @@
   }
 
   // Build locale switch targets from the current URL first, then fallback to data-target values.
-  function buildLocalePathFromCurrentUrl(targetLang) {
+  function buildLocalePathFromCurrentUrl(targetLang, languageSwitcher) {
     var url = new URL(window.location.href);
     var path = url.pathname;
+    var baseUrl = languageSwitcher
+      ? languageSwitcher.getAttribute("data-baseurl") || ""
+      : "";
 
     // Normalize to avoid accidental double slashes while preserving root.
     path = path.replace(/\/+/g, "/");
+    baseUrl = baseUrl.replace(/\/+/g, "/").replace(/\/$/, "");
+    if (baseUrl && (path === baseUrl || path.indexOf(baseUrl + "/") === 0)) {
+      path = path.slice(baseUrl.length) || "/";
+    }
     if (path !== "/" && path.endsWith("/")) {
       path = path.slice(0, -1);
     }
@@ -89,11 +96,11 @@
     params.delete("fallback_attempt");
 
     var query = params.toString();
-    return targetPath + (query ? "?" + query : "") + url.hash;
+    return baseUrl + targetPath + (query ? "?" + query : "") + url.hash;
   }
 
   function resolveSwitcherTarget(languageSwitcher, targetLang) {
-    if (!languageSwitcher) return buildLocalePathFromCurrentUrl(targetLang);
+    if (!languageSwitcher) return buildLocalePathFromCurrentUrl(targetLang, languageSwitcher);
 
     var dataAttribute = targetLang === "es" ? "data-target-es" : "data-target-en";
     var serverTarget = languageSwitcher.getAttribute(dataAttribute);
@@ -120,7 +127,7 @@
     }
 
     // Default: compute target from current browser URL (works for pages with matching slugs).
-    return buildLocalePathFromCurrentUrl(targetLang);
+    return buildLocalePathFromCurrentUrl(targetLang, languageSwitcher);
   }
 
   // Fix language switcher href buttons to use current URL-aware targets.
@@ -148,4 +155,3 @@
   setupProfileImageFallbacks();
   fixLanguageSwitcherHrefs();
 })();
-
